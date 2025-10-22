@@ -25,7 +25,7 @@ function App() {
       <BrowserRouter>
         <nav>
           <Link to="/">Home</Link>
-          <Link to="/maaf">Maaf</Link>
+          <Link to="/editor">Editor</Link>
         </nav>
         <Routes>
           <Route path="/" element={<Abcd />}></Route>
