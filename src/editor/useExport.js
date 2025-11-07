@@ -1,11 +1,11 @@
 import { useCallback } from "react";
-import { calculateMapBounds, convertToTileArray, convertToCollisionArray } from "./mapUtils";
+import { calculateMapBounds, convertToASCIIArray, convertToStringArray } from "./mapUtils";
 
-export default function useExport(tiles, tileSize) {
+export default function useExport(tiles, tileSize, playerPosition) {
   const exportMap = useCallback(() => {
-    const bounds = calculateMapBounds(tiles, tileSize);
-    const tileArray = convertToTileArray(tiles, bounds, tileSize);
-    const collisionArray = convertToCollisionArray(tiles, bounds, tileSize);
+    const bounds = calculateMapBounds(tiles, tileSize, playerPosition);
+    const asciiArray = convertToASCIIArray(tiles, bounds, tileSize, playerPosition);
+    const stringArray = convertToStringArray(asciiArray);
     
     const mapData = {
       metadata: {
@@ -14,8 +14,7 @@ export default function useExport(tiles, tileSize) {
         tileSize: tileSize,
         bounds: bounds,
       },
-      tiles: tileArray,
-      collisions: collisionArray
+      map: stringArray
     };
     
     const json = JSON.stringify(mapData, null, 2);
@@ -28,7 +27,7 @@ export default function useExport(tiles, tileSize) {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-  }, [tiles, tileSize]);
+  }, [tiles, tileSize, playerPosition]);
 
   return { exportMap };
 }

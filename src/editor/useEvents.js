@@ -3,7 +3,7 @@ import { useCallback } from "react";
 export default function useEvents(ctx, drawing, camera, setCamera, tileSize) {
   const { 
     mode, isEraser, isDrawing, touchState,
-    setTiles, setIsDrawing, setTouchState
+    setTiles, setPlayerPosition, setIsDrawing, setTouchState
   } = drawing;
 
   const drawAtPosition = useCallback((clientX, clientY) => {
@@ -16,29 +16,32 @@ export default function useEvents(ctx, drawing, camera, setCamera, tileSize) {
     const worldX = Math.floor((clientX - rect.left - cx - camera.x) / tileSize) * tileSize;
     const worldY = Math.floor((clientY - rect.top - cy - camera.y) / tileSize) * tileSize;
 
+    if (mode === "player") {
+      // Place player (hanya satu player, replace yang lama)
+      setPlayerPosition({ x: worldX, y: worldY });
+      return;
+    }
+
+    // Untuk floor dan wall, gunakan logic sebelumnya
     setTiles(prev => {
       const existingIndex = prev.findIndex(t => t.x === worldX && t.y === worldY);
       
       if (isEraser) {
-        // Erase mode - remove tile
         if (existingIndex !== -1) {
           return prev.filter((_, index) => index !== existingIndex);
         }
       } else {
-        // Draw mode - add or update tile
         if (existingIndex !== -1) {
-          // Update existing tile type
           const updated = [...prev];
           updated[existingIndex] = { ...updated[existingIndex], type: mode };
           return updated;
         } else {
-          // Add new tile
           return [...prev, { x: worldX, y: worldY, type: mode }];
         }
       }
       return prev;
     });
-  }, [ctx, camera, tileSize, mode, isEraser, setTiles]);
+  }, [ctx, camera, tileSize, mode, isEraser, setTiles, setPlayerPosition]);
 
   // Mouse events
   const handleMouseDown = useCallback((e) => {

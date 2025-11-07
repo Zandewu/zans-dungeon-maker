@@ -1,9 +1,10 @@
 import { useState, useCallback } from "react";
 
 export default function useDrawing() {
-  const [mode, setMode] = useState("floor");
+  const [mode, setMode] = useState("floor"); // "floor" | "wall" | "player"
   const [isEraser, setIsEraser] = useState(false);
   const [tiles, setTiles] = useState([]);
+  const [playerPosition, setPlayerPosition] = useState(null); // { x, y }
   const [isDrawing, setIsDrawing] = useState(false);
   const [touchState, setTouchState] = useState({ 
     mode: null, 
@@ -12,6 +13,7 @@ export default function useDrawing() {
 
   const clearTiles = useCallback(() => {
     setTiles([]);
+    setPlayerPosition(null);
   }, []);
 
   return {
@@ -22,6 +24,8 @@ export default function useDrawing() {
     setIsEraser,
     tiles,
     setTiles,
+    playerPosition,
+    setPlayerPosition,
     isDrawing,
     setIsDrawing,
     touchState,

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { drawGrid, drawTiles, drawCenterCross } from "./drawingUtils";
+import { drawGrid, drawTiles, drawPlayer, drawCenterCross } from "./drawingUtils";
 
 export default function useCanvas(canvasRef, tileSize, drawingState) {
   const [ctx, setCtx] = useState(null);
@@ -19,8 +19,9 @@ export default function useCanvas(canvasRef, tileSize, drawingState) {
     // Draw components
     drawGrid(context, camera, tileSize, cx, cy, width, height);
     drawTiles(context, drawingState.tiles, camera, tileSize, cx, cy);
+    drawPlayer(context, drawingState.playerPosition, camera, tileSize, cx, cy);
     drawCenterCross(context, cx, cy);
-  }, [camera, tileSize, drawingState.tiles]);
+  }, [camera, tileSize, drawingState.tiles, drawingState.playerPosition]);
 
   // Setup canvas
   useEffect(() => {

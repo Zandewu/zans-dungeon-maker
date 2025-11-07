@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Editor from './pages/EditorDungeon.jsx'
+import HomePage from './pages/HomePage.jsx'
+import Register from './pages/Register.jsx'
+import Login from './pages/Login.jsx'
 
 function App() {
   function ErrorBoundary({ children }) {
@@ -21,8 +24,9 @@ function App() {
           <Link to="/editor">Editor</Link>
         </nav>
         <Routes>
-          <Route path="/" element={<Abcd />}></Route>
-          <Route path="/maaf" element={<Maaf />}></Route>
+          <Route path="/" element={<HomePage />}></Route>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route
   path="/editor"
   element={

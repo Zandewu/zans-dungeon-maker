@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      kaplay:
+        specifier: 4000.0.0-alpha.23
+        version: 4000.0.0-alpha.23
       react:
         specifier: ^19.1.1
         version: 19.2.0
@@ -920,6 +923,10 @@ packages:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
     hasBin: true
+
+  kaplay@4000.0.0-alpha.23:
+    resolution: {integrity: sha512-2VEQ+68eKQYBbZbSrpd9z11Im6djdfp7cJ/d1m5XXuDHGx1SY5hpJEo6bASui1JZaE1Z+7h8NR3DV3/xMoNWZw==}
+    engines: {node: '>=20.0.0'}
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
@@ -2119,6 +2126,8 @@ snapshots:
   json-stable-stringify-without-jsonify@1.0.1: {}
 
   json5@2.2.3: {}
+
+  kaplay@4000.0.0-alpha.23: {}
 
   keyv@4.5.4:
     dependencies:
